@@ -1,11 +1,324 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Adoption</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulse Fitness Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#ff4f00;
+    --on-primary:#fffefb;
+    --ink:#201515;
+    --ink-soft:#2f2a26;
+    --body:#605d52;
+    --body-mid:#939084;
+    --mute:#c5c0b1;
+    --canvas:#fffefb;
+    --canvas-soft:#f8f4f0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:'IBM Plex Sans Thai','Inter',system-ui,-apple-system,sans-serif;
+  }
+  .display{
+    font-family:'Degular Display','IBM Plex Sans Thai','Inter',system-ui,sans-serif;
+    font-weight:500;
+  }
+  a{text-decoration:none;color:inherit;}
+
+  /* Nav */
+  .nav-bar{
+    background:var(--canvas);
+    color:var(--ink);
+    padding:12px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    max-width:1280px;
+    margin:0 auto;
+  }
+  .nav-bar .logo{
+    font-family:'Degular Display','IBM Plex Sans Thai','Inter',system-ui,sans-serif;
+    font-weight:500;
+    font-size:20px;
+    letter-spacing:1px;
+  }
+  .nav-bar .logo span{color:var(--primary);}
+  .nav-link{font-size:16px;}
+
+  /* Hero */
+  .hero-band{
+    background:var(--canvas);
+    color:var(--ink);
+    padding:64px 24px;
+    max-width:1280px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:'Degular Display','IBM Plex Sans Thai','Inter',system-ui,sans-serif;
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin-bottom:16px;
+  }
+  .hero-band h1{
+    font-family:'Degular Display','IBM Plex Sans Thai','Inter',system-ui,sans-serif;
+    font-weight:500;
+    font-size:56px;
+    line-height:56px;
+    margin:0 0 24px 0;
+  }
+  .hero-band p{
+    font-size:20px;
+    line-height:30px;
+    letter-spacing:-0.2px;
+    color:var(--body);
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  /* Section */
+  .content-band{
+    background:var(--canvas-soft);
+    padding:64px 24px;
+  }
+  .section-inner{
+    max-width:1280px;
+    margin:0 auto;
+  }
+  .section-title{
+    font-family:'Degular Display','IBM Plex Sans Thai','Inter',system-ui,sans-serif;
+    font-weight:500;
+    font-size:32px;
+    line-height:36px;
+    letter-spacing:1px;
+    text-align:center;
+    margin-bottom:8px;
+  }
+  .section-sub{
+    text-align:center;
+    color:var(--body);
+    font-size:18px;
+    line-height:27px;
+    margin-bottom:48px;
+  }
+
+  /* Class grid */
+  .class-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+  .class-card{
+    background:var(--canvas);
+    border:1px solid var(--ink);
+    border-radius:12px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .class-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    display:block;
+  }
+  .class-card .card-body{
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+  .class-card h3{
+    font-size:24px;
+    font-weight:600;
+    line-height:30px;
+    letter-spacing:-0.6px;
+    margin:0 0 8px 0;
+  }
+  .class-card p.desc{
+    font-size:16px;
+    line-height:24px;
+    color:var(--body);
+    margin:0 0 16px 0;
+    flex:1;
+  }
+  .badge-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:16px;
+  }
+  .badge-pill{
+    background:var(--canvas-soft);
+    color:var(--ink);
+    font-size:14px;
+    line-height:21px;
+    padding:4px 12px;
+    border-radius:9999px;
+    border:1px solid var(--mute);
+  }
+  .badge-pill.level-beginner{border-color:#8fbf7f;}
+  .badge-pill.level-intermediate{border-color:#e0a83f;}
+  .badge-pill.level-advanced{border-color:var(--primary);color:var(--primary);}
+  .meta-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    color:var(--body-mid);
+    margin-bottom:20px;
+    border-top:1px solid var(--mute);
+    padding-top:12px;
+  }
+  .btn-primary{
+    display:inline-block;
+    background:var(--primary);
+    color:var(--on-primary);
+    font-size:18px;
+    font-weight:600;
+    line-height:27px;
+    text-align:center;
+    padding:12px 24px;
+    border-radius:12px;
+  }
+
+  /* Footer */
+  .footer{
+    background:var(--ink);
+    color:var(--canvas-soft);
+    padding:48px 24px;
+    font-size:16px;
+    line-height:24px;
+  }
+  .footer-inner{
+    max-width:1280px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .footer-credit{
+    text-align:right;
+    color:var(--mute);
+    font-size:14px;
+  }
+
+  @media (max-width:1023px){
+    .class-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:767px){
+    .class-grid{grid-template-columns:1fr;}
+    .hero-band h1{font-size:40px;line-height:44px;}
+    .footer-inner{flex-direction:column;align-items:flex-start;}
+    .footer-credit{text-align:left;}
+  }
+</style>
 </head>
 <body>
-    
+
+  <nav class="nav-bar">
+    <div class="logo">Pulse<span>.</span></div>
+    <a class="nav-link" href="booking.html">จองคลาสเรียน</a>
+  </nav>
+
+  <header class="hero-band">
+    <div class="eyebrow">Pulse Fitness Studio</div>
+    <h1 class="display">ออกกำลังกาย<br>ให้เป็นจังหวะชีวิต</h1>
+    <p>คลาสออกกำลังกายหลากหลายรูปแบบ ออกแบบมาให้เหมาะกับทุกระดับความฟิต ตั้งแต่มือใหม่ไปจนถึงนักออกกำลังกายตัวยง</p>
+  </header>
+
+  <section class="content-band">
+    <div class="section-inner">
+      <h2 class="section-title display">คลาสออกกำลังกายของเรา</h2>
+      <p class="section-sub">เลือกคลาสที่ใช่ แล้วจองที่นั่งได้ทันที</p>
+
+      <div class="class-grid">
+
+        <div class="class-card">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" alt="Yoga class">
+          <div class="card-body">
+            <h3>Yoga Flow</h3>
+            <p class="desc">คลาสโยคะที่เน้นการเคลื่อนไหวเชื่อมต่อลมหายใจ ช่วยเพิ่มความยืดหยุ่นและลดความเครียด เหมาะสำหรับผู้เริ่มต้น</p>
+            <div class="badge-row">
+              <span class="badge-pill level-beginner">Beginner</span>
+            </div>
+            <div class="meta-row">
+              <span>60 นาที</span>
+              <span>สูงสุด 20 คน</span>
+            </div>
+            <a class="btn-primary" href="booking.html">จองคลาสนี้</a>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Pilates class">
+          <div class="card-body">
+            <h3>Pilates Core</h3>
+            <p class="desc">เสริมสร้างกล้ามเนื้อแกนกลางลำตัว เพิ่มความสมดุลและท่าทางที่ดี ด้วยท่าฝึกแบบควบคุมจังหวะ</p>
+            <div class="badge-row">
+              <span class="badge-pill level-intermediate">Intermediate</span>
+            </div>
+            <div class="meta-row">
+              <span>50 นาที</span>
+              <span>สูงสุด 15 คน</span>
+            </div>
+            <a class="btn-primary" href="booking.html">จองคลาสนี้</a>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80" alt="Indoor cycling class">
+          <div class="card-body">
+            <h3>Indoor Cycling</h3>
+            <p class="desc">ปั่นจักรยานในร่มตามจังหวะเพลง เผาผลาญแคลอรีสูง เสริมสร้างความแข็งแรงของหัวใจและหลอดเลือด</p>
+            <div class="badge-row">
+              <span class="badge-pill level-advanced">Advanced</span>
+            </div>
+            <div class="meta-row">
+              <span>45 นาที</span>
+              <span>สูงสุด 25 คน</span>
+            </div>
+            <a class="btn-primary" href="booking.html">จองคลาสนี้</a>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=600&q=80" alt="Boxing class">
+          <div class="card-body">
+            <h3>Boxing Blast</h3>
+            <p class="desc">คลาสชกมวยเพื่อความฟิต ฝึกความแข็งแรง ความคล่องตัว และปลดปล่อยพลังงานอย่างเต็มที่</p>
+            <div class="badge-row">
+              <span class="badge-pill level-intermediate">Intermediate</span>
+            </div>
+            <div class="meta-row">
+              <span>55 นาที</span>
+              <span>สูงสุด 18 คน</span>
+            </div>
+            <a class="btn-primary" href="booking.html">จองคลาสนี้</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>Pulse Fitness Studio — เปลี่ยนทุกวันให้แข็งแรงขึ้น</div>
+      <div class="footer-credit">6730149721<br>Nat Silprasert</div>
+    </div>
+  </footer>
+
 </body>
 </html>
